@@ -2,3 +2,6 @@
 venv/
 __pycache__/
 .pytest_cache/
+
+# Local SQLite database files (dev/test data, not source)
+*.db

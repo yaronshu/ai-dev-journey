@@ -25,3 +25,27 @@ class TriageResult(BaseModel):
     suggested_assignee: Optional[str] = None
     explanation: str
     confidence: float = Field(ge=0.0, le=1.0)   # ge=greater or equal, le=less or equal
+
+
+class Defect(BaseModel):   # how a stored defect (one DB row) is returned by the API
+    id: str
+    title: str
+    description: str
+    severity: str
+    reporter: str
+    status: Literal['open','in_progress','resolved','closed']
+    created_at: datetime
+    category: Optional[str] = None
+    suggested_severity: Optional[str] = None
+    suggested_assignee: Optional[str] = None
+    explanation: Optional[str] = None
+    confidence: Optional[float] = None
+
+
+class DefectUpdate(BaseModel):   # PUT body — every field optional; send only what changes
+    title: Optional[str] = None
+    description: Optional[str] = None
+    severity: Optional[Literal['low','medium','high','critical']] = None
+    status: Optional[Literal['open','in_progress','resolved','closed']] = None
+    category: Optional[str] = None
+    suggested_assignee: Optional[str] = None
